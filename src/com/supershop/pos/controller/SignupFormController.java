@@ -1,6 +1,7 @@
 package com.supershop.pos.controller;
 
 import com.jfoenix.controls.JFXTextField;
+import com.supershop.pos.util.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,15 +35,18 @@ public class SignupFormController {
 
             PreparedStatement preparedStatement=connection.prepareStatement((sql));
             preparedStatement.setString(1,txtEmail.getText());
-            preparedStatement.setString(2,txtPassword.getText());
+            preparedStatement.setString(2, PasswordManager.encriptPassword(txtPassword.getText()));
 
 
             if(preparedStatement.executeUpdate()>0){
 
                 new Alert(Alert.AlertType.CONFIRMATION,"User Saved").show();
+                txtEmail.clear();
+                txtPassword.clear();
 
             }else{
                 new Alert(Alert.AlertType.WARNING,"Try Again").show();
+                txtPassword.clear();
             }
 
 

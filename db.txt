@@ -1,0 +1,145 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema shop_pos
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema shop_pos
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `shop_pos` DEFAULT CHARACTER SET utf8 ;
+USE `shop_pos` ;
+
+-- -----------------------------------------------------
+-- Table `shop_pos`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop_pos`.`user` (
+  `email` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(750) NULL,
+  PRIMARY KEY (`email`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `shop_pos`.`customer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop_pos`.`customer` (
+  `email` VARCHAR(100) NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `contact_no` VARCHAR(45) NULL,
+  `salary` VARCHAR(45) NULL,
+  `customercol` DOUBLE NULL,
+  PRIMARY KEY (`email`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `shop_pos`.`loyalty_card`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop_pos`.`loyalty_card` (
+  `code` INT NOT NULL,
+  `type` ENUM('GOLD', 'PLATINUM', 'SILVER') NULL,
+  `barcode` LONGBLOB NULL,
+  `customer_email` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`code`),
+  INDEX `fk_loyalty_card_customer_idx` (`customer_email` ASC) VISIBLE,
+  CONSTRAINT `fk_loyalty_card_customer`
+    FOREIGN KEY (`customer_email`)
+    REFERENCES `mydb`.`customer` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `shop_pos`.`product`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop_pos`.`product` (
+  `code` INT NOT NULL,
+  `discription` VARCHAR(100) NULL,
+  `unit_price` DOUBLE NULL,
+  PRIMARY KEY (`code`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `shop_pos`.`product_details`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop_pos`.`product_details` (
+  `code` INT NOT NULL,
+  `barcode` LONGBLOB NULL,
+  `qty_on_hand` INT NULL,
+  `selling_price` DOUBLE NULL,
+  `buying_price` DOUBLE NULL,
+  `discount_availability` TINYINT NULL,
+  `show_price` DOUBLE NULL,
+  `product_code` INT NOT NULL,
+  PRIMARY KEY (`code`),
+  INDEX `fk_product_details_product1_idx` (`product_code` ASC) VISIBLE,
+  CONSTRAINT `fk_product_details_product1`
+    FOREIGN KEY (`product_code`)
+    REFERENCES `mydb`.`product` (`code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `shop_pos`.`order_details`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop_pos`.`order_details` (
+  `code` INT NOT NULL,
+  `issued_code` DATE NULL,
+  `total_cost` DOUBLE NULL,
+  `owner_details` VARCHAR(100) NULL,
+  `customer_email` VARCHAR(100) NOT NULL,
+  `discount_amount` DOUBLE NULL,
+  `user_email` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`code`),
+  INDEX `fk_order_details_customer1_idx` (`customer_email` ASC) VISIBLE,
+  INDEX `fk_order_details_user1_idx` (`user_email` ASC) VISIBLE,
+  CONSTRAINT `fk_order_details_customer1`
+    FOREIGN KEY (`customer_email`)
+    REFERENCES `mydb`.`customer` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_details_user1`
+    FOREIGN KEY (`user_email`)
+    REFERENCES `mydb`.`user` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `shop_pos`.`product_details_has_order_details`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop_pos`.`product_details_has_order_details` (
+  `product_details_code` INT NOT NULL,
+  `order_details_code` INT NOT NULL,
+  `product_qty` INT NULL,
+  `discount` DOUBLE NULL,
+  `amount` DOUBLE NULL,
+  PRIMARY KEY (`product_details_code`, `order_details_code`),
+  INDEX `fk_product_details_has_order_details_order_details1_idx` (`order_details_code` ASC) VISIBLE,
+  INDEX `fk_product_details_has_order_details_product_details1_idx` (`product_details_code` ASC) VISIBLE,
+  CONSTRAINT `fk_product_details_has_order_details_product_details1`
+    FOREIGN KEY (`product_details_code`)
+    REFERENCES `mydb`.`product_details` (`code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_product_details_has_order_details_order_details1`
+    FOREIGN KEY (`order_details_code`)
+    REFERENCES `mydb`.`order_details` (`code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

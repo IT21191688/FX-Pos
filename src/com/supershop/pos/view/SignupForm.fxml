@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="733.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.LoginFormController">
+   <children>
+      <Text fill="#0007d0" fontSmoothingType="LCD" layoutX="233.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super Shop" underline="true">
+         <font>
+            <Font name="System Bold" size="46.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutX="145.0" layoutY="142.0" prefHeight="388.0" prefWidth="433.0" style="-fx-background-color: #bdc3c7;">
+         <children>
+            <Text layoutX="171.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <JFXTextField labelFloat="true" layoutX="82.0" layoutY="76.0" prefHeight="35.0" prefWidth="270.0" promptText="Email" />
+            <JFXTextField labelFloat="true" layoutX="82.0" layoutY="155.0" prefHeight="35.0" prefWidth="270.0" promptText="password" />
+            <JFXButton buttonType="RAISED" layoutX="79.0" layoutY="229.0" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #2ecc71; -fx-border-radius: 10px;" text="Register Now" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="312.0" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #3498db; -fx-border-radius: 10px;" text="Already Have an Account" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Text layoutX="210.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+   </children>
+</AnchorPane>

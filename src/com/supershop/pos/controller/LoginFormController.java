@@ -42,6 +42,8 @@ public class LoginFormController {
                 if(PasswordManager.checkPassword(set.getString(2),txtPassword.getText())){
                     //login success
                     new Alert(Alert.AlertType.CONFIRMATION,"Login Success").show();
+
+                    setUi("DashboardForm");
                 }
                 else{
                     //login password not correct
@@ -58,7 +60,7 @@ public class LoginFormController {
 
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="733.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.LoginFormController">
+<AnchorPane fx:id="context" prefHeight="600.0" prefWidth="733.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.SignupFormController">
    <children>
       <Text fill="#0007d0" fontSmoothingType="LCD" layoutX="233.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super Shop" underline="true">
          <font>
@@ -21,9 +21,9 @@
                   <Font name="System Bold" size="26.0" />
                </font>
             </Text>
-            <JFXTextField labelFloat="true" layoutX="82.0" layoutY="76.0" prefHeight="35.0" prefWidth="270.0" promptText="Email" />
-            <JFXTextField labelFloat="true" layoutX="82.0" layoutY="155.0" prefHeight="35.0" prefWidth="270.0" promptText="password" />
-            <JFXButton buttonType="RAISED" layoutX="79.0" layoutY="229.0" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #2ecc71; -fx-border-radius: 10px;" text="Register Now" textFill="WHITE">
+            <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="82.0" layoutY="76.0" prefHeight="35.0" prefWidth="270.0" promptText="Email" />
+            <JFXTextField fx:id="txtPassword" labelFloat="true" layoutX="82.0" layoutY="155.0" prefHeight="35.0" prefWidth="270.0" promptText="password" />
+            <JFXButton buttonType="RAISED" layoutX="79.0" layoutY="229.0" onAction="#btnRegisterOnAction" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #2ecc71; -fx-border-radius: 10px;" text="Register Now" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
@@ -31,7 +31,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="312.0" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #3498db; -fx-border-radius: 10px;" text="Already Have an Account" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="312.0" onAction="#btnLoginPageOnAction" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #3498db; -fx-border-radius: 10px;" text="Already Have an Account" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>

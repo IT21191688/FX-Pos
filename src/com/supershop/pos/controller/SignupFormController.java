@@ -1,6 +1,7 @@
 package com.supershop.pos.controller;
 
 import com.jfoenix.controls.JFXTextField;
+import com.supershop.pos.dao.DatabaseAccessCode;
 import com.supershop.pos.util.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -26,19 +27,10 @@ public class SignupFormController {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
+            boolean success= DatabaseAccessCode.createUser(txtEmail.getText(),txtPassword.getText());
 
-            String sql="INSERT INTO user VALUES (?,?)";
-
-
-            PreparedStatement preparedStatement=connection.prepareStatement((sql));
-            preparedStatement.setString(1,txtEmail.getText());
-            preparedStatement.setString(2, PasswordManager.encriptPassword(txtPassword.getText()));
-
-
-            if(preparedStatement.executeUpdate()>0){
+            if(success){
 
                 new Alert(Alert.AlertType.CONFIRMATION,"User Saved").show();
                 txtEmail.clear();

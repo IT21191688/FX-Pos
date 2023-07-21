@@ -8,7 +8,6 @@ import org.mindrot.BCrypt;
 
 public class PasswordManager {
 
-
     public static String encriptPassword(String plainText){
 
        return BCrypt.hashpw(plainText, BCrypt.gensalt(10));
@@ -20,10 +19,5 @@ public class PasswordManager {
         return BCrypt.checkpw(plainText,hash);
 
     }
-
-
-
-
-
 
 }

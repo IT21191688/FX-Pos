@@ -2,6 +2,8 @@ package com.supershop.pos.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.supershop.pos.dao.DatabaseAccessCode;
+import com.supershop.pos.model.UserModel;
 import com.supershop.pos.util.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,23 +25,13 @@ public class LoginFormController {
 
     public void btnLoginOnAction(ActionEvent event) throws ClassNotFoundException {
 
-
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
 
+            UserModel user= DatabaseAccessCode.findUser(txtEmail.getText());
 
-            String sql="SELECT * FROM user WHERE email=?";
+            if(user!=null){
 
-            PreparedStatement preparedStatement=connection.prepareStatement((sql));
-            preparedStatement.setString(1,txtEmail.getText());
-
-
-            ResultSet set=preparedStatement.executeQuery();
-
-            if(set.next()){
-
-                if(PasswordManager.checkPassword(set.getString(2),txtPassword.getText())){
+                if(PasswordManager.checkPassword(user.getPassword(),txtPassword.getText())){
                     //login success
                     new Alert(Alert.AlertType.CONFIRMATION,"Login Success").show();
 

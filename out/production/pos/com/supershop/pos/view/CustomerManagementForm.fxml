@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="contentArea" prefHeight="731.0" prefWidth="883.0" style="-fx-background-color: #bed0db;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.supershop.pos.controller.CustomerManagementForm">
+<AnchorPane fx:id="contentArea" prefHeight="731.0" prefWidth="883.0" style="-fx-background-color: #bed0db;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.CustomerManagementForm">
    <children>
       <Text fill="#1102eb" layoutX="23.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Management">
          <font>
@@ -21,18 +21,19 @@
       <JFXButton layoutX="679.0" layoutY="14.0" onAction="#addNewCustomerOnAction" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #072bf2;" text="+   New Customer" textFill="WHITE" />
       <AnchorPane fx:id="customerContentArea" layoutX="19.0" layoutY="102.0" prefHeight="591.0" prefWidth="843.0">
          <children>
-            <TableView layoutX="11.0" layoutY="84.0" prefHeight="493.0" prefWidth="819.0">
+            <TableView fx:id="tblView" layoutX="11.0" layoutY="84.0" prefHeight="493.0" prefWidth="819.0">
               <columns>
-                <TableColumn prefWidth="53.0" text="#" />
-                <TableColumn prefWidth="151.0" text="Email" />
-                  <TableColumn prefWidth="147.0" text="Name" />
-                  <TableColumn prefWidth="149.0" text="Contact" />
-                  <TableColumn prefWidth="116.0" text="Salary" />
-                  <TableColumn prefWidth="101.0" text="Update" />
-                  <TableColumn prefWidth="98.0" text="Delete" />
+                <TableColumn fx:id="colId" prefWidth="53.0" text="#" />
+                <TableColumn fx:id="colEmail" prefWidth="151.0" text="Email" />
+                  <TableColumn fx:id="colName" prefWidth="147.0" text="Name" />
+                  <TableColumn fx:id="colContact" prefWidth="149.0" text="Contact" />
+                  <TableColumn fx:id="colSalary" prefWidth="116.0" text="Salary" />
+                  <TableColumn fx:id="colUpdate" prefWidth="101.0" text="Update" />
+                  <TableColumn fx:id="colDelete" prefWidth="98.0" text="Delete" />
               </columns>
             </TableView>
-            <JFXTextField layoutX="513.0" layoutY="31.0" prefHeight="31.0" prefWidth="285.0" promptText="Search Here" unFocusColor="#6d5aff" />
+            <JFXTextField fx:id="txtSearch" layoutX="513.0" layoutY="31.0" prefHeight="31.0" prefWidth="285.0" promptText="Search Here" unFocusColor="#6d5aff" />
+            <JFXButton layoutX="22.0" layoutY="16.0" onAction="#btnRefreshOnAction" text="Refresh" />
          </children>
       </AnchorPane>
    </children>

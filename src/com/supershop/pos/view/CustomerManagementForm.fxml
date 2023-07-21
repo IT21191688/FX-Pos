@@ -28,11 +28,12 @@
                   <TableColumn fx:id="colName" prefWidth="147.0" text="Name" />
                   <TableColumn fx:id="colContact" prefWidth="149.0" text="Contact" />
                   <TableColumn fx:id="colSalary" prefWidth="116.0" text="Salary" />
-                  <TableColumn fx:id="colOperate" prefWidth="101.0" text="Update" />
-                  <TableColumn prefWidth="98.0" text="Delete" />
+                  <TableColumn fx:id="colUpdate" prefWidth="101.0" text="Update" />
+                  <TableColumn fx:id="colDelete" prefWidth="98.0" text="Delete" />
               </columns>
             </TableView>
             <JFXTextField fx:id="txtSearch" layoutX="513.0" layoutY="31.0" prefHeight="31.0" prefWidth="285.0" promptText="Search Here" unFocusColor="#6d5aff" />
+            <JFXButton layoutX="22.0" layoutY="16.0" onAction="#btnRefreshOnAction" text="Refresh" />
          </children>
       </AnchorPane>
    </children>

@@ -14,6 +14,9 @@ public class DashboardFormController {
 
     public AnchorPane contentArea;
 
+    public void btnHomeOnAction(ActionEvent event) throws IOException {
+        setUi("HomePageForm");
+    }
     public void btnCustomerOnAction(ActionEvent event) throws IOException {
         setUi("CustomerManagementForm");
     }
@@ -39,4 +42,6 @@ public class DashboardFormController {
         Parent newContent = FXMLLoader.load(getClass().getResource("../view/" + url + ".fxml"));
         contentArea.getChildren().setAll(newContent);
     }
+
+
 }

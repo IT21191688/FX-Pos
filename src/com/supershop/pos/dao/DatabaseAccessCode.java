@@ -193,14 +193,15 @@ public class DatabaseAccessCode {
     //product management
 
 
-    public static boolean createProduct(int code,double unitPrice,String discription) throws ClassNotFoundException, SQLException {
+    public static boolean createProduct(int code,double unitPrice,String discription,String productName) throws ClassNotFoundException, SQLException {
 
-        String sql="INSERT INTO product (code, discription, unit_price) VALUES (?,?,?)";
+        String sql="INSERT INTO product (code,discription,unit_price,product_name) VALUES (?,?,?,?)";
 
         PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
         preparedStatement.setInt(1,code);
-        preparedStatement.setDouble(2, unitPrice);
-        preparedStatement.setString(3, discription);
+        preparedStatement.setString(2, discription);
+        preparedStatement.setDouble(3, unitPrice);
+        preparedStatement.setString(4, productName);
 
         return preparedStatement.executeUpdate()>0;
 
@@ -231,7 +232,7 @@ public class DatabaseAccessCode {
         List<ProductModel> productModels=new ArrayList<>();
         while (set.next()){
 
-            ProductModel product=new ProductModel(set.getInt(1),set.getDouble(2),set.getString(3));
+            ProductModel product=new ProductModel(set.getInt(1),set.getDouble(3),set.getString(2),set.getString(4));
 
             productModels.add(product);
 
@@ -244,23 +245,21 @@ public class DatabaseAccessCode {
     }
 
 
-    public static List<ProductModel> searchProducts(int txtSearch) throws ClassNotFoundException, SQLException {
+    public static List<ProductModel> searchProducts(String txtSearch) throws ClassNotFoundException, SQLException {
 
-
-
-        String sql="SELECT * FROM product WHERE code LIKE ? || name LIKE ?";
+        String sql="SELECT * FROM product WHERE product_name LIKE ? || discription LIKE ?";
 
         PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
 
-        preparedStatement.setInt(1,txtSearch);
-        preparedStatement.setInt(2,txtSearch);
+        preparedStatement.setString(1,txtSearch);
+        preparedStatement.setString(2,txtSearch);
 
         ResultSet set=preparedStatement.executeQuery();
 
         List<ProductModel> productModels=new ArrayList<>();
         while (set.next()){
 
-            ProductModel product=new ProductModel(set.getInt(1),set.getDouble(2),set.getString(3));
+            ProductModel product=new ProductModel(set.getInt(1),set.getDouble(3),set.getString(2),set.getString(4));
 
             productModels.add(product);
 

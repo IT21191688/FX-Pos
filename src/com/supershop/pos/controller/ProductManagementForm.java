@@ -1,48 +1,169 @@
 package com.supershop.pos.controller;
 
-import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.supershop.pos.dao.DatabaseAccessCode;
+import com.supershop.pos.model.CustomerModel;
+import com.supershop.pos.model.ProductModel;
+import com.supershop.pos.view.tm.CustomerTm;
+import com.supershop.pos.view.tm.ProductTm;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Optional;
 
 public class ProductManagementForm {
 
 
-    public AnchorPane contentArea;
     public AnchorPane customerContentArea;
-    public TableView tblView;
+    public AnchorPane contentArea;
+    public TableView<ProductTm> tblView;
     public TableColumn colId;
-    public TableColumn colDescription;
-    public TableColumn colShowMore;
+    public TableColumn colName;
+    public TableColumn colCode;
+    public TableColumn colDis;
     public TableColumn colDelete;
     public JFXTextField txtSearchProduct;
-    public JFXTextArea txtProductDescription;
-    public JFXTextField txtProductCode;
-    public JFXTextField txtProductCode1;
-    public JFXTextArea txtProductDiscription1;
-    public TableView tblView1;
-    public TableColumn tbl_B_Id;
-    public TableColumn tbl_B_Quty;
-    public TableColumn tbl_B_Sprice;
-    public TableColumn tbl_B_Bprice;
-    public TableColumn tbl_B_Dav;
-    public TableColumn tbl_B_Showprice;
-    public TableColumn tbl_B_Delete;
-    public JFXTextArea txtProductDiscription;
-    public TableColumn colDiscription;
-    public JFXTextField txtUnitPrice;
+
+
+    private String searchText="";
+
+
+    public void initialize() throws SQLException, ClassNotFoundException {
+
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDis.setCellValueFactory(new PropertyValueFactory<>("discription"));
+
+        colDelete.setCellValueFactory(new PropertyValueFactory<>("deleteBtn"));
+
+        loadAllProducts(searchText);
+
+        tblView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+
+            if(newValue!=null){
+                setData(newValue);
+            }
+        }));
+
+        txtSearchProduct.textProperty().addListener(((observable, oldValue, newValue) -> {
+
+            searchText=newValue;
+
+            System.out.println(newValue);
+
+            try {
+                loadAllProducts(searchText);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }));
+
+
+
+    }
+
+    private void setData(ProductTm newValue) {
+
+
+
+    }
+
+    private void loadAllProducts(String searchText) throws SQLException, ClassNotFoundException {
+
+        ObservableList<ProductTm> observableList= FXCollections.observableArrayList();
+
+        int counter=1;
+
+        for(ProductModel product:searchText.length()>0? DatabaseAccessCode.searchProducts(searchText):DatabaseAccessCode.findAllProducts()){
+
+            javafx.scene.control.Button deleteBtn=new Button("delete");
+
+            ProductTm tm=new ProductTm(counter,product.getCode(),product.getName(),product.getUnitPrice(),product.getDiscription(),deleteBtn);
+
+            observableList.add(tm);
+            counter++;
+
+
+
+            deleteBtn.setOnAction((e)->{
+
+                Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Are You Sure?",ButtonType.YES,ButtonType.NO);
+
+                Optional<ButtonType> selectedButtonType=alert.showAndWait();
+
+
+
+                try {
+
+                    boolean success=DatabaseAccessCode.deleteProduct(product.getCode());
+
+                    if(success){
+                        new Alert(Alert.AlertType.CONFIRMATION,"Success").show();
+                        loadAllProducts(searchText);
+                    }else{
+                        new Alert(Alert.AlertType.ERROR,"UnSuccess").show();
+                    }
+
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+/*
+                if(selectedButtonType.equals(ButtonType.YES)){
+                    try {
+
+
+                    } catch (ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+
+*/
+
+            });
+        }
+
+        tblView.setItems(observableList);
+
+    }
+
+
+
+
+
+
+    public void newProductOnAction(ActionEvent event) throws IOException {
+
+        setUi("AddProductForm");
+
+    }
 
     public void backProductOnAction(ActionEvent event) {
     }
 
-    public void saveProductOnAction(ActionEvent event) {
-    }
-
-    public void newProductOnAction(ActionEvent event) {
-    }
-
     public void newBatchOnAction(ActionEvent event) {
+    }
+
+
+    private void setUi(String url) throws IOException {
+        Parent newContent = FXMLLoader.load(getClass().getResource("../view/" + url + ".fxml"));
+        contentArea.getChildren().setAll(newContent);
     }
 }

@@ -7,9 +7,6 @@ import java.awt.*;
 public class CustomerTm {
 
     private int id;
-
-
-
     private String email;
     private String name;
     private String contact;

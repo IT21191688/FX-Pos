@@ -8,6 +8,16 @@ public class ProductModel {
     private double unitPrice;
     private String discription;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
 
 
     public ProductModel() {
@@ -16,10 +26,11 @@ public class ProductModel {
     }
 
 
-    public ProductModel(int code, double unitPrice, String discription) {
+    public ProductModel(int code, double unitPrice, String discription, String name) {
         this.code = code;
         this.unitPrice = unitPrice;
         this.discription = discription;
+        this.name = name;
     }
 
     public int getCode() {

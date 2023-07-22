@@ -21,19 +21,17 @@
       <JFXButton layoutX="700.0" layoutY="14.0" onAction="#backProductOnAction" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #072bf2;" text="Back " textFill="WHITE" />
       <AnchorPane fx:id="customerContentArea" layoutX="23.0" layoutY="102.0" prefHeight="590.0" prefWidth="846.0">
          <children>
-            <TableView fx:id="tblView" layoutX="14.0" layoutY="282.0" prefHeight="307.0" prefWidth="395.0">
+            <TableView fx:id="tblView" layoutX="10.0" layoutY="153.0" prefHeight="440.0" prefWidth="395.0">
                <columns>
-                  <TableColumn fx:id="colId" prefWidth="65.0" text="#" />
-                  <TableColumn fx:id="colDiscription" prefWidth="112.0" text="Desc" />
-                  <TableColumn fx:id="colShowMore" prefWidth="117.0" text="Show More" />
-                  <TableColumn fx:id="colDelete" prefWidth="122.0" text="Delete" />
+                  <TableColumn fx:id="colId" prefWidth="49.0" text="#" />
+                  <TableColumn fx:id="colName" prefWidth="68.0" text="Name" />
+                  <TableColumn fx:id="colCode" prefWidth="84.0" text="Code" />
+                  <TableColumn fx:id="colDis" prefWidth="126.0" text="Dis" />
+                  <TableColumn fx:id="colDelete" prefWidth="84.0" text="Delete" />
                </columns>
             </TableView>
             <Separator layoutX="415.0" layoutY="32.0" orientation="VERTICAL" prefHeight="603.0" prefWidth="0.0" />
-            <JFXTextField fx:id="txtSearchProduct" layoutX="14.0" layoutY="239.0" prefHeight="31.0" prefWidth="395.0" promptText="Search Here" style="-fx-background-color: #ffffff;" />
-            <JFXTextArea fx:id="txtProductDiscription" focusColor="#5a76ee" layoutX="14.0" layoutY="93.0" prefHeight="97.0" prefWidth="395.0" promptText="Discription" style="-fx-background-color: #ffffff;" unFocusColor="#222222" />
-            <JFXButton layoutX="302.0" layoutY="198.0" onAction="#saveProductOnAction" style="-fx-background-color: #4b56eb;" text="Save Product" textFill="WHITE" />
-            <JFXTextField fx:id="txtProductCode" layoutX="14.0" layoutY="16.0" promptText="Product Code" style="-fx-background-color: #ffffff;" />
+            <JFXTextField fx:id="txtSearchProduct" layoutX="14.0" layoutY="95.0" prefHeight="31.0" prefWidth="395.0" promptText="Search Here" style="-fx-background-color: #ffffff;" />
             <JFXButton layoutX="302.0" layoutY="16.0" onAction="#newProductOnAction" style="-fx-background-color: #4b56eb;" text="New Product" textFill="WHITE" />
             <JFXTextField fx:id="txtProductCode1" layoutX="432.0" layoutY="16.0" prefHeight="31.0" prefWidth="205.0" promptText="selected Product Code" style="-fx-background-color: #ffffff;" />
             <JFXTextArea fx:id="txtProductDiscription1" focusColor="#5a76ee" layoutX="432.0" layoutY="62.0" prefHeight="97.0" prefWidth="403.0" promptText="Discription" style="-fx-background-color: #ffffff;" unFocusColor="#222222" />
@@ -49,7 +47,6 @@
                   <TableColumn fx:id="tbl_B_Delete" prefWidth="69.0" text="Delete" />
                </columns>
             </TableView>
-            <JFXTextField fx:id="txtUnitPrice" layoutX="14.0" layoutY="55.0" promptText="Unit Price" style="-fx-background-color: #ffffff;" />
          </children>
       </AnchorPane>
    </children>

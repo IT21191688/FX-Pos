@@ -1,6 +1,8 @@
 package com.supershop.pos.dao;
 
+import com.supershop.pos.db.DbConnection;
 import com.supershop.pos.model.CustomerModel;
+import com.supershop.pos.model.ProductModel;
 import com.supershop.pos.model.UserModel;
 import com.supershop.pos.util.PasswordManager;
 
@@ -15,12 +17,9 @@ public class DatabaseAccessCode {
     public static boolean createUser(String email,String password) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
-
         String sql="INSERT INTO user VALUES (?,?)";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
         preparedStatement.setString(1,email);
         preparedStatement.setString(2, PasswordManager.encriptPassword(password));
 
@@ -35,13 +34,9 @@ public class DatabaseAccessCode {
 
 
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
-
-
         String sql="SELECT * FROM user WHERE email=?";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
         preparedStatement.setString(1,email);
 
 
@@ -67,13 +62,9 @@ public class DatabaseAccessCode {
     public static boolean createCustomer(String email,String name,String contact,double salary) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
-
-
         String sql="INSERT INTO customer (email, name, contact_no, salary) VALUES (?,?,?,?)";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
         preparedStatement.setString(1,email);
         preparedStatement.setString(2, name);
         preparedStatement.setString(3, contact);
@@ -88,13 +79,11 @@ public class DatabaseAccessCode {
 
     public static boolean updateCustomer(String email,String name,String contact,double salary) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
 
 
         String sql="UPDATE customer SET name=?, contact_no=?,salary=? WHERE email=? ";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, contact);
         preparedStatement.setDouble(3, salary);
@@ -108,13 +97,11 @@ public class DatabaseAccessCode {
     public static CustomerModel getOneCustomer(String email) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
 
 
         String sql="SELECT * FROM customer WHERE email=?";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
         preparedStatement.setString(1,email);
 
 
@@ -135,13 +122,11 @@ public class DatabaseAccessCode {
 
     public static boolean deleteCustomer(String email) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
 
 
         String sql="DELETE FROM customer WHERE email=?";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement((sql));
         preparedStatement.setString(1,email);
 
         return preparedStatement.executeUpdate()>0;
@@ -152,13 +137,9 @@ public class DatabaseAccessCode {
     public static List<CustomerModel> findAllCustomers() throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
-
-
         String sql="SELECT * FROM customer";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
 
         ResultSet set=preparedStatement.executeQuery();
 
@@ -182,13 +163,10 @@ public class DatabaseAccessCode {
 
         txtSearch="%"+txtSearch+"%";
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_pos","root","1234");
-
 
         String sql="SELECT * FROM customer WHERE email LIKE ? || name LIKE ?";
 
-        PreparedStatement preparedStatement=connection.prepareStatement((sql));
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
 
         preparedStatement.setString(1,txtSearch);
         preparedStatement.setString(2,txtSearch);
@@ -205,6 +183,92 @@ public class DatabaseAccessCode {
         }
 
         return customerModels;
+
+    }
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //product management
+
+
+    public static boolean createProduct(int code,double unitPrice,String discription) throws ClassNotFoundException, SQLException {
+
+        String sql="INSERT INTO product (code, discription, unit_price) VALUES (?,?,?)";
+
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
+        preparedStatement.setInt(1,code);
+        preparedStatement.setDouble(2, unitPrice);
+        preparedStatement.setString(3, discription);
+
+        return preparedStatement.executeUpdate()>0;
+
+    }
+
+
+    public static boolean deleteProduct(int code) throws ClassNotFoundException, SQLException {
+
+        String sql="DELETE FROM product WHERE code=?";
+
+        PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement((sql));
+        preparedStatement.setInt(1,code);
+
+        return preparedStatement.executeUpdate()>0;
+
+    }
+
+
+    public static List<ProductModel> findAllProducts() throws ClassNotFoundException, SQLException {
+
+
+        String sql="SELECT * FROM product";
+
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
+
+        ResultSet set=preparedStatement.executeQuery();
+
+        List<ProductModel> productModels=new ArrayList<>();
+        while (set.next()){
+
+            ProductModel product=new ProductModel(set.getInt(1),set.getDouble(2),set.getString(3));
+
+            productModels.add(product);
+
+
+        }
+
+        return productModels;
+
+
+    }
+
+
+    public static List<ProductModel> searchProducts(int txtSearch) throws ClassNotFoundException, SQLException {
+
+
+
+        String sql="SELECT * FROM product WHERE code LIKE ? || name LIKE ?";
+
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement((sql));
+
+        preparedStatement.setInt(1,txtSearch);
+        preparedStatement.setInt(2,txtSearch);
+
+        ResultSet set=preparedStatement.executeQuery();
+
+        List<ProductModel> productModels=new ArrayList<>();
+        while (set.next()){
+
+            ProductModel product=new ProductModel(set.getInt(1),set.getDouble(2),set.getString(3));
+
+            productModels.add(product);
+
+        }
+
+        return productModels;
+
+
 
     }
 

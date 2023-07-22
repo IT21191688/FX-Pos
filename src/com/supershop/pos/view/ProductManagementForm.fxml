@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.supershop.pos.controller.ProductManagementForm"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="contentArea" prefHeight="731.0" prefWidth="883.0" style="-fx-background-color: #bed0db;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.ProductManagementForm">
+   <children>
+      <Text fill="#1102eb" layoutX="23.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Management">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Separator layoutX="14.0" layoutY="68.0" prefHeight="3.0" prefWidth="855.0" />
+      <JFXButton layoutX="700.0" layoutY="14.0" onAction="#backProductOnAction" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #072bf2;" text="Back " textFill="WHITE" />
+      <AnchorPane fx:id="customerContentArea" layoutX="23.0" layoutY="102.0" prefHeight="590.0" prefWidth="846.0">
+         <children>
+            <TableView fx:id="tblView" layoutX="14.0" layoutY="282.0" prefHeight="307.0" prefWidth="395.0">
+               <columns>
+                  <TableColumn fx:id="colId" prefWidth="65.0" text="#" />
+                  <TableColumn fx:id="colDiscription" prefWidth="112.0" text="Desc" />
+                  <TableColumn fx:id="colShowMore" prefWidth="117.0" text="Show More" />
+                  <TableColumn fx:id="colDelete" prefWidth="122.0" text="Delete" />
+               </columns>
+            </TableView>
+            <Separator layoutX="415.0" layoutY="32.0" orientation="VERTICAL" prefHeight="603.0" prefWidth="0.0" />
+            <JFXTextField fx:id="txtSearchProduct" layoutX="14.0" layoutY="239.0" prefHeight="31.0" prefWidth="395.0" promptText="Search Here" style="-fx-background-color: #ffffff;" />
+            <JFXTextArea fx:id="txtProductDiscription" focusColor="#5a76ee" layoutX="14.0" layoutY="93.0" prefHeight="97.0" prefWidth="395.0" promptText="Discription" style="-fx-background-color: #ffffff;" unFocusColor="#222222" />
+            <JFXButton layoutX="302.0" layoutY="198.0" onAction="#saveProductOnAction" style="-fx-background-color: #4b56eb;" text="Save Product" textFill="WHITE" />
+            <JFXTextField fx:id="txtProductCode" layoutX="14.0" layoutY="16.0" promptText="Product Code" style="-fx-background-color: #ffffff;" />
+            <JFXButton layoutX="302.0" layoutY="16.0" onAction="#newProductOnAction" style="-fx-background-color: #4b56eb;" text="New Product" textFill="WHITE" />
+            <JFXTextField fx:id="txtProductCode1" layoutX="432.0" layoutY="16.0" prefHeight="31.0" prefWidth="205.0" promptText="selected Product Code" style="-fx-background-color: #ffffff;" />
+            <JFXTextArea fx:id="txtProductDiscription1" focusColor="#5a76ee" layoutX="432.0" layoutY="62.0" prefHeight="97.0" prefWidth="403.0" promptText="Discription" style="-fx-background-color: #ffffff;" unFocusColor="#222222" />
+            <JFXButton layoutX="727.0" layoutY="16.0" onAction="#newBatchOnAction" style="-fx-background-color: #4b56eb;" text="+New Batch" textFill="WHITE" />
+            <TableView fx:id="tblView1" layoutX="429.0" layoutY="229.0" prefHeight="364.0" prefWidth="421.0">
+               <columns>
+                  <TableColumn fx:id="tbl_B_Id" prefWidth="41.0" text="#" />
+                  <TableColumn fx:id="tbl_B_Quty" prefWidth="57.0" text="QTY" />
+                  <TableColumn fx:id="tbl_B_Sprice" prefWidth="61.0" text="S-Price" />
+                  <TableColumn fx:id="tbl_B_Bprice" prefWidth="66.0" text="B-Price" />
+                  <TableColumn fx:id="tbl_B_Dav" prefWidth="56.0" text="D:Av" />
+                  <TableColumn fx:id="tbl_B_Showprice" prefWidth="69.0" text="S-Price" />
+                  <TableColumn fx:id="tbl_B_Delete" prefWidth="69.0" text="Delete" />
+               </columns>
+            </TableView>
+            <JFXTextField fx:id="txtUnitPrice" layoutX="14.0" layoutY="55.0" promptText="Unit Price" style="-fx-background-color: #ffffff;" />
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>

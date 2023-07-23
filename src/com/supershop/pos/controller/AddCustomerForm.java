@@ -32,7 +32,7 @@ public class AddCustomerForm {
 
     public void btnSubmitCustomerOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
-        boolean success= DatabaseAccessCode.createCustomer(txtEmail.getText(),txtName.getText(),txtContact.getText(),Double.parseDouble(txtSalary.getText()));
+        boolean success= new DatabaseAccessCode().createCustomer(txtEmail.getText(),txtName.getText(),txtContact.getText(),Double.parseDouble(txtSalary.getText()));
 
 
         if(success){

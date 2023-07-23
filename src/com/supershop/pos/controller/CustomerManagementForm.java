@@ -2,6 +2,7 @@ package com.supershop.pos.controller;
 
 import com.jfoenix.controls.JFXTextField;
 import com.supershop.pos.dao.DatabaseAccessCode;
+import com.supershop.pos.entity.Customer;
 import com.supershop.pos.model.CustomerModel;
 import com.supershop.pos.view.tm.CustomerTm;
 import javafx.collections.FXCollections;
@@ -88,12 +89,12 @@ public class CustomerManagementForm {
 
         int counter=1;
 
-        for(CustomerModel customer:searchText.length()>0? DatabaseAccessCode.searchCustomers(searchText):DatabaseAccessCode.findAllCustomers()){
+        for(Customer customer:searchText.length()>0? new DatabaseAccessCode().searchCustomers(searchText):new DatabaseAccessCode().findAllCustomers()){
 
             javafx.scene.control.Button deleteBtn=new Button("delete");
             javafx.scene.control.Button updateBtn=new Button("update");
 
-            CustomerTm tm=new CustomerTm(counter,customer.getEmail(),customer.getName(),customer.getContact(),customer.getSalary(),deleteBtn,updateBtn);
+            CustomerTm tm=new CustomerTm(counter,customer.getEmail(),customer.getName(),customer.getContact_no(),customer.getSalary(),deleteBtn,updateBtn);
 
             observableList.add(tm);
             counter++;
@@ -110,7 +111,7 @@ public class CustomerManagementForm {
 
                 try {
 
-                     boolean success=DatabaseAccessCode.deleteCustomer(customer.getEmail());
+                     boolean success=new DatabaseAccessCode().deleteCustomer(customer.getEmail());
 
                     if(success){
                         new Alert(Alert.AlertType.CONFIRMATION,"Success").show();

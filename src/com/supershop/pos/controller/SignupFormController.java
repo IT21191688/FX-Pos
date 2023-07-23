@@ -28,7 +28,7 @@ public class SignupFormController {
 
         try {
 
-            boolean success= DatabaseAccessCode.createUser(txtEmail.getText(),txtPassword.getText());
+            boolean success= new DatabaseAccessCode().createUser(txtEmail.getText(),txtPassword.getText());
 
             if(success){
 

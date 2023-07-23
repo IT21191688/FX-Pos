@@ -2,9 +2,7 @@ package com.supershop.pos.controller;
 
 import com.jfoenix.controls.JFXTextField;
 import com.supershop.pos.dao.DatabaseAccessCode;
-import com.supershop.pos.model.CustomerModel;
-import com.supershop.pos.model.ProductModel;
-import com.supershop.pos.view.tm.CustomerTm;
+import com.supershop.pos.entity.Product;
 import com.supershop.pos.view.tm.ProductTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -87,11 +85,11 @@ public class ProductManagementForm {
 
         int counter=1;
 
-        for(ProductModel product:searchText.length()>0? DatabaseAccessCode.searchProducts(searchText):DatabaseAccessCode.findAllProducts()){
+        for(Product product:searchText.length()>0?new DatabaseAccessCode().searchProducts(searchText):new DatabaseAccessCode().findAllProducts()){
 
             javafx.scene.control.Button deleteBtn=new Button("delete");
 
-            ProductTm tm=new ProductTm(counter,product.getCode(),product.getName(),product.getUnitPrice(),product.getDiscription(),deleteBtn);
+            ProductTm tm=new ProductTm(counter,product.getCode(),product.getProduct_name(),product.getUnit_price(),product.getDiscription(),deleteBtn);
 
             observableList.add(tm);
             counter++;
@@ -108,7 +106,7 @@ public class ProductManagementForm {
 
                 try {
 
-                    boolean success=DatabaseAccessCode.deleteProduct(product.getCode());
+                    boolean success=new DatabaseAccessCode().deleteProduct(product.getCode());
 
                     if(success){
                         new Alert(Alert.AlertType.CONFIRMATION,"Success").show();

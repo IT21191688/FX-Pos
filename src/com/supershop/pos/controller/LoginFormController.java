@@ -3,6 +3,7 @@ package com.supershop.pos.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.supershop.pos.dao.DatabaseAccessCode;
+import com.supershop.pos.entity.User;
 import com.supershop.pos.model.UserModel;
 import com.supershop.pos.util.PasswordManager;
 import javafx.event.ActionEvent;
@@ -27,7 +28,7 @@ public class LoginFormController {
 
         try {
 
-            UserModel user= DatabaseAccessCode.findUser(txtEmail.getText());
+            User user=new DatabaseAccessCode().findUser(txtEmail.getText());
 
             if(user!=null){
 

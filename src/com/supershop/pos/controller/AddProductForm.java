@@ -20,7 +20,7 @@ public class AddProductForm {
 
     public void btnSubmitProductOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
-        boolean success= DatabaseAccessCode.createProduct(Integer.parseInt(txtProductCode.getText()),Double.parseDouble(txtUnitPrice.getText()),txtDescription.getText(),txtProductName.getText());
+        boolean success= new DatabaseAccessCode().createProduct(Integer.parseInt(txtProductCode.getText()),Double.parseDouble(txtUnitPrice.getText()),txtDescription.getText(),txtProductName.getText());
 
         if(success){
 

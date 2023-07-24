@@ -1,5 +1,6 @@
 package com.supershop.pos.controller;
 
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.supershop.pos.dao.DatabaseAccessCode;
 import com.supershop.pos.entity.Product;
@@ -30,6 +31,16 @@ public class ProductManagementForm {
     public TableColumn colDis;
     public TableColumn colDelete;
     public JFXTextField txtSearchProduct;
+    public JFXTextField txtProductCode1;
+    public JFXTextArea txtProductDiscription1;
+    public TableView tblView1;
+    public TableColumn tbl_B_Id;
+    public TableColumn tbl_B_Quty;
+    public TableColumn tbl_B_Sprice;
+    public TableColumn tbl_B_Bprice;
+    public TableColumn tbl_B_Dav;
+    public TableColumn tbl_B_Showprice;
+    public TableColumn tbl_B_Delete;
 
 
     private String searchText="";
@@ -69,12 +80,21 @@ public class ProductManagementForm {
             }
         }));
 
+        tblView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            setData(newValue);
+        });
+
 
 
     }
 
     private void setData(ProductTm newValue) {
 
+
+
+        txtProductCode1.setText(String.valueOf(newValue.getCode()));
+        txtProductDiscription1.setText(newValue.getDiscription());
 
 
     }
@@ -148,15 +168,14 @@ public class ProductManagementForm {
 
 
     public void newProductOnAction(ActionEvent event) throws IOException {
-
         setUi("AddProductForm");
-
     }
 
     public void backProductOnAction(ActionEvent event) {
     }
 
-    public void newBatchOnAction(ActionEvent event) {
+    public void newBatchOnAction(ActionEvent event) throws IOException {
+        setUi("NewBatchForm");
     }
 
 

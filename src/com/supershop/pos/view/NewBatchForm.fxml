@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="contentArea" prefHeight="591.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.NewBatchForm">
+   <children>
+      <Text layoutX="331.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add New batch">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txtEmail" layoutX="422.0" layoutY="141.0" prefHeight="31.0" prefWidth="344.0" promptText="qty" />
+      <JFXTextField fx:id="txtName" layoutX="422.0" layoutY="188.0" prefHeight="31.0" prefWidth="344.0" promptText="selling Price" />
+      <JFXTextField fx:id="txtContact" layoutX="422.0" layoutY="239.0" prefHeight="31.0" prefWidth="344.0" promptText="show Price" />
+      <JFXTextField fx:id="txtSalary" layoutX="422.0" layoutY="296.0" prefHeight="31.0" prefWidth="344.0" promptText="buying price" />
+      <JFXButton fx:id="btnSubmitCustomer" layoutX="394.0" layoutY="515.0" onAction="#btnSubmitBatchOnAction" prefHeight="43.0" prefWidth="236.0" style="-fx-background-color: #59b01a;" text="Submit Batch" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="121.0" layoutY="515.0" onAction="#backCancelOnAction" prefHeight="43.0" prefWidth="236.0" style="-fx-background-color: #ed2311;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane layoutX="112.0" layoutY="141.0" prefHeight="196.0" prefWidth="219.0" style="-fx-background-color: #0c2dcf;">
+         <children>
+            <ImageView fx:id="barcodeImg" fitHeight="162.0" fitWidth="194.0" layoutX="13.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="txtEmail1" layoutX="112.0" layoutY="386.0" prefHeight="31.0" prefWidth="219.0" promptText="product Id" />
+      <JFXTextField fx:id="txtSalary1" layoutX="113.0" layoutY="445.0" prefHeight="31.0" prefWidth="252.0" promptText="discription" />
+      <Text layoutX="418.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <RadioButton layoutX="418.0" layoutY="401.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton layoutX="488.0" layoutY="401.0" mnemonicParsing="false" selected="true" text="No" />
+   </children>
+</AnchorPane>

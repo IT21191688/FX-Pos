@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="contentArea" prefHeight="591.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.UpdateCustomerForm">
+   <children>
+      <Text layoutX="310.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Customer">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txtEmail" editable="false" layoutX="241.0" layoutY="153.0" prefHeight="31.0" prefWidth="344.0" promptText="Email" />
+      <JFXTextField fx:id="txtName" layoutX="241.0" layoutY="215.0" prefHeight="31.0" prefWidth="344.0" promptText="Name" />
+      <JFXTextField fx:id="txtContact" layoutX="241.0" layoutY="280.0" prefHeight="31.0" prefWidth="344.0" promptText="Contact" />
+      <JFXTextField fx:id="txtSalary" layoutX="241.0" layoutY="349.0" prefHeight="31.0" prefWidth="344.0" promptText="Salary" />
+      <JFXButton fx:id="btnSubmitCustomer" layoutX="297.0" layoutY="443.0" onAction="#btnUpdateCustomerOnAction" prefHeight="43.0" prefWidth="236.0" style="-fx-background-color: #59b01a;" text="Update Customer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="297.0" layoutY="508.0" onAction="#backCancelOnAction" prefHeight="43.0" prefWidth="236.0" style="-fx-background-color: #ed2311;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="contentArea" prefHeight="591.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supershop.pos.controller.AddProductForm">
+   <children>
+      <Text layoutX="301.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add New Product">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txtProductName" layoutX="241.0" layoutY="153.0" prefHeight="31.0" prefWidth="344.0" promptText="product name" />
+      <JFXTextField fx:id="txtProductCode" layoutX="241.0" layoutY="215.0" prefHeight="31.0" prefWidth="344.0" promptText="product code" />
+      <JFXTextField fx:id="txtUnitPrice" layoutX="241.0" layoutY="280.0" prefHeight="31.0" prefWidth="344.0" promptText="product unit price" />
+      <JFXTextField fx:id="txtDiscription" layoutX="241.0" layoutY="349.0" prefHeight="31.0" prefWidth="344.0" promptText="product discription" />
+      <JFXButton fx:id="btnSubmitCustomer" layoutX="297.0" layoutY="443.0" onAction="#btnSubmitProductOnAction" prefHeight="43.0" prefWidth="236.0" style="-fx-background-color: #59b01a;" text="Submit Product" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="297.0" layoutY="508.0" onAction="#backCancelOnAction" prefHeight="43.0" prefWidth="236.0" style="-fx-background-color: #ed2311;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
